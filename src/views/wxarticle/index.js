@@ -1,0 +1,1 @@
+export { default as WxChapter } from './components/WxChapter'

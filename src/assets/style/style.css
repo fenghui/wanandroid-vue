@@ -1,0 +1,25 @@
+html, body {
+  font-family: "Microsoft YaHei";
+  word-wrap: break-word; 
+  white-space: normal; 
+  word-break:break-all; 
+}
+
+h3 {
+  word-wrap: break-word;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+.icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  background-position: center center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  display: block;
+}
