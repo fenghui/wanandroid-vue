@@ -17,32 +17,34 @@
     },
     data(){
       return {
-        currPage: 0,
-        totalPage: 1,
-        articleDatas: [],
-        cid: 0
+        cid: -1,
+        currPage: 1,
+        totalPage: 1, 
+        articleDatas: []
       }
     },
     watch:{},
     computed:{},
     methods:{
       getArticleList() {
-        Axios.get(`${Api.articleListUrl}/${this.currPage}/json?cid=${this.cid}`)
-        .then( (response) => {
-          const { errorCode, data } = response.data;
-          if(errorCode == 0) {
-            const { pageCount, datas } = data;
-            this.totalPage = pageCount;
-            this.articleDatas = this.articleDatas.concat(datas);
-          } else {
-            console.error('errorCode', errorCode);
-          }
-        })
-        .catch( (error) => {
-          console.error(error);
-        })
-        .then( function() {
-        })
+        if(this.cid > 0) {
+          Axios.get(`${Api.projectListUrl}/${this.currPage}/json?cid=${this.cid}`)
+          .then( (response) => {
+            const { errorCode, data } = response.data;
+            if(errorCode == 0) {
+              const { pageCount, datas } = data;
+              this.totalPage = pageCount;
+              this.articleDatas = this.articleDatas.concat(datas);
+            } else {
+              console.error('errorCode', errorCode);
+            }
+          })
+          .catch( (error) => {
+            console.error(error);
+          })
+          .then( function() {
+          })
+        }
       },
       setScrollListener() {
         const el = document.querySelector('.container');
@@ -57,10 +59,17 @@
             }
           }
         }
+      },
+      loadList(cid) {
+        this.currPage = 0;
+        this.totalPage = 1; 
+        this.articleDatas = [];
+        this.cid = cid;
+        this.getArticleList();
       }
     },
     created(){
-      this.cid = this.$route.params.id;
+      
     },
     mounted(){
       this.getArticleList();

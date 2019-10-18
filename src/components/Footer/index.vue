@@ -26,7 +26,7 @@
           {name : '体系', className : 'wallet', router : '/tree'}, 
           {name : '公众号', className : 'message', router : '/wxarticle'},
           {name: '导航', className : 'local', router : '/navigate'},
-          {name: '项目', className : 'list', router : '/main'}
+          {name: '项目', className : 'list', router : '/project'}
         ]
       }
     },

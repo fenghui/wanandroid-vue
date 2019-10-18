@@ -5,7 +5,9 @@ const Api = {
   articleListUrl: '/api/article/list/',
   wxArticleChapterUrl: '/api/wxarticle/chapters/json',
   wxArticleListUrl: '/api/wxarticle/list/',
-  navUrl: '/api/navi/json'
+  navUrl: '/api/navi/json',
+  projectTreeUrl: '/api/project/tree/json',
+  projectListUrl: '/api/project/list/'
 };
 
 export default Api;
