@@ -4,7 +4,8 @@ const Api = {
   treeUrl: '/api/tree/json',
   articleListUrl: '/api/article/list/',
   wxArticleChapterUrl: '/api/wxarticle/chapters/json',
-  wxArticleListUrl: '/api/wxarticle/list/'
+  wxArticleListUrl: '/api/wxarticle/list/',
+  navUrl: '/api/navi/json'
 };
 
 export default Api;

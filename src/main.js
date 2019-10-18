@@ -6,6 +6,7 @@ import './assets/style/style.css'
 import MainPage from './views/main';
 import { TreeList, ArticleList} from './views/tree';
 import { WxChapter } from './views/wxarticle';
+import Navigate from './views/navigate';
 
 Vue.config.productionTip = false
 Vue.use(VueRouter);
@@ -30,6 +31,9 @@ const routes = [{
 }, {
   path: '/wxarticle',
   component: WxChapter
+}, {
+  path: '/navigate',
+  component: Navigate
 }];
 
 const router = new VueRouter({
