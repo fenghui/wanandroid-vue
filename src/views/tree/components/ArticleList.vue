@@ -1,7 +1,10 @@
 <template>
-    <ArticleList 
-      class="article-list"
-      :articleLists="articleDatas" />
+    <div>
+      <!-- <span @click="pageBack()">Back</span> -->
+      <ArticleList 
+        class="article-list"
+        :articleLists="articleDatas" />
+    </div>
 </template>
 
 <script>
@@ -23,7 +26,16 @@
         cid: 0
       }
     },
-    watch:{},
+    watch:{
+      '$route'() {
+        if(this.$route.params.id != undefined) {
+          this.articleDatas = [];
+          this.currPage = 0;
+          this.cid = this.$route.params.id;
+          this.getArticleList();
+        }
+      }    
+    },
     computed:{},
     methods:{
       getArticleList() {
@@ -57,6 +69,10 @@
             }
           }
         }
+      },
+      pageBack() {
+        //this.$router.replace('/tree');
+        this.$router.back();
       }
     },
     created(){
