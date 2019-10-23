@@ -2,15 +2,13 @@
   <div class="index">
     <Header 
       isLogined="true" 
-      :title="tabNames[tabIndex]"/>
+      :title="tabName"/>
     <div class="container">
       <keep-alive>
         <router-view></router-view>
       </keep-alive>
-      <!-- <CatalogPage /> -->
     </div>
-    <Footer 
-      v-on:switchTab="changeTab"/>
+    <Footer />
   </div>
 </template>
 
@@ -18,28 +16,25 @@
   import Header from '../components/Header'
   import Footer from '../components/Footer'
   import MainContainer from './main'
-  import CatalogPage from './tree'
+  import { mapGetters } from 'vuex' 
 
   export default {
     components:{
       Header,
       Footer,
-      MainContainer,
-      CatalogPage
+      MainContainer
     },
     props:{},
     data(){
-      return {
-        tabNames : [ '玩Android', '体系', '公众号', '导航', '项目' ],
-        tabIndex : 0
-      }
+      return {}
     },
     watch:{},
-    computed:{},
+    computed:{
+      ...mapGetters('global', [
+        'tabName'
+      ])
+    },
     methods:{
-      changeTab(_tabIndex) {
-        this.tabIndex = _tabIndex;
-      }
     },
     created(){
     },

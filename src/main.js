@@ -8,6 +8,7 @@ import { TreeList, ArticleList} from './views/tree';
 import { WxChapter } from './views/wxarticle';
 import Navigate from './views/navigate';
 import { Projects } from './views/project';
+import store from './store';
 
 Vue.config.productionTip = false
 Vue.use(VueRouter);
@@ -48,6 +49,7 @@ const router = new VueRouter({
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   render: h => h(App)
 });

@@ -5,7 +5,7 @@
       v-for="(item, idx) in menuData" 
       :key="idx"
       :class=" [ tabIndex == idx ? 'selected' : '', item.className] "
-      @click="tabSelect(idx)">
+      @click="changeTabIndex(idx)">
       <router-link :to=item.router>
         <i class="icon" />
         <span>{{ item.name }}</span>
@@ -16,11 +16,11 @@
 </template>
 
 <script>
+  import { mapState, mapActions } from 'vuex'
   export default {
     components:{},
     data(){
       return {
-        tabIndex: 0,
         menuData: [
           {name : '首页', className : 'home', router : '/main'}, 
           {name : '体系', className : 'wallet', router : '/tree'}, 
@@ -31,12 +31,20 @@
       }
     },
     watch:{},
-    computed:{},
+    computed: {
+      ...mapState( {
+        tabIndex: state => state.global.tabIndex
+      } )
+    },
     methods:{
       tabSelect(_tabIndex) {
-        this.tabIndex = _tabIndex;
-        this.$emit('switchTab', _tabIndex);
-      }
+        if(this.tabIndex != _tabIndex) {
+          this.$store.dispatch('global/changeTabIndex', _tabIndex);
+        }
+      },
+      ...mapActions('global', [
+        'changeTabIndex'
+      ])
     },
     created(){},
     mounted(){}
