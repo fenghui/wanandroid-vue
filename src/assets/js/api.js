@@ -7,7 +7,10 @@ const Api = {
   wxArticleListUrl: '/api/wxarticle/list/',
   navUrl: '/api/navi/json',
   projectTreeUrl: '/api/project/tree/json',
-  projectListUrl: '/api/project/list/'
+  projectListUrl: '/api/project/list/',
+  loginUrl: '/api/user/login',
+  collectUrl: '/api/lg/collect/list/',
+  logoutUrl: '/api/user/logout/json'
 };
 
 export default Api;

@@ -1,29 +1,34 @@
 <template>
-  <a :href="articleData.link" target="_blank">
-    <li class="articlelist-item">
-      <div class="left">
+  
+  <li class="articlelist-item">
+    <div class="left">
+      <a :href="articleData.link" target="_blank">
         <div class="title">
-          <h3>{{ articleData.title }}</h3>
+          <h4>{{ articleData.title }}</h4>
           <p v-html="articleData.desc"></p>
         </div>
-        <div class="info">
-          <i class="icon" :class="[articleData.collect ? 'icon-like-selected' : 'icon-like']"  />
-          <i class="icon icon-edit" />
-          <span>{{ articleData.niceDate }}</span>
-          <span>{{ articleData.author || articleData.shareUser }}</span>
-        </div>
+      </a>
+      <div class="info">
+        <i 
+          @click.stop="doCollect(articleData)"
+          class="icon" 
+          :class="[isCollected ? 'icon-like-selected' : 'icon-like']"  />
+        <i class="icon icon-edit" />
+        <span>{{ articleData.niceDate }}</span>
+        <span>{{ articleData.author || articleData.shareUser }}</span>
       </div>
-      <div class="right">
-        <div 
-          v-bind:class="[articleData.envelopePic == '' ? 'no-pic' : 'pic']">
-          {{ articleData.envelopePic == '' ? articleData.superChapterName : '' }}
-        </div>
+    </div>
+    <div class="right">
+      <div 
+        v-bind:class="[articleData.envelopePic == '' ? 'no-pic' : 'pic']">
+        {{ articleData.envelopePic == '' ? articleData.superChapterName : '' }}
       </div>
-    </li>
-  </a>
+    </div>
+  </li>
 </template>
 
 <script>
+  import { mapState } from 'vuex';
   export default {
     components:{},
     props:{
@@ -31,13 +36,52 @@
     },
     data(){
       return {
+        isCollected: false
       }
     },
-    watch:{},
-    computed:{},
-    methods:{},
+    watch: {},
+    computed: {
+      ...mapState('user', [ 'isLogined' ])
+    },
+    methods:{
+      doCollect(articleData) {
+        if(!this.isLogined) {
+          this.$router.push('/login');
+          return;
+        }
+        if(this.isCollected) {
+          this.$axios.post(`/api/lg/uncollect_originId/${articleData.id}/json`)
+            .then( (response) => {
+              const { errorCode } = response.data;
+              if(errorCode == 0) {
+                this.isCollected = false;
+              } else {
+                console.error('errorCode', errorCode);
+              }
+            });
+        } else {
+          this.$axios.post(`/api/lg/collect/${articleData.id}/json`)
+            .then( (response) => {
+              const { errorCode } = response.data;
+              if(errorCode == 0) {
+                this.isCollected = true;
+              } else {
+                console.error('errorCode', errorCode);
+              }
+            });
+        }
+      },
+      collect() {
+
+      },
+      uncollect() {
+
+      }
+    },
     created(){},
-    mounted(){}
+    mounted(){
+      this.isCollected = this.articleData.collect;
+    }
   }
 </script>
 

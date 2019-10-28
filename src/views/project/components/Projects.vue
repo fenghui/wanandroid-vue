@@ -15,7 +15,6 @@
 
 <script>
   import ArticleList from './ArticleList'
-  import Axios from 'axios';
   import Api from '../../../assets/js/api'
   export default {
     components:{
@@ -40,7 +39,7 @@
     },
     methods:{
       getProjectTreeList() {
-        Axios.get(Api.projectTreeUrl)
+        this.$axios.get(Api.projectTreeUrl)
         .then( (response) => {
           const { errorCode, data } = response.data;
           if(errorCode == 0) {

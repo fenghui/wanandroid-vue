@@ -1,6 +1,6 @@
 <template>
   <div class="list">
-    <h3>{{ articles.name }}</h3>
+    <h4>{{ articles.name }}</h4>
     <div>
       <span 
         v-for="(item, index) in articles.articles" 
@@ -38,7 +38,7 @@
     // height: 100%;
     overflow-y: scroll;
     background-color: #ffffff;
-    h3 {
+    h4 {
       height: 40px;
       line-height: 40px;
     }

@@ -15,7 +15,6 @@
 
 <script>
   import ArticleList from './ArticleList'
-  import Axios from 'axios';
   import Api from '../../../assets/js/api'
   export default {
     components:{
@@ -41,7 +40,7 @@
     },
     methods:{
       getArticleList() {
-        Axios.get(Api.wxArticleChapterUrl)
+        this.$axios.get(Api.wxArticleChapterUrl)
         .then( (response) => {
           const { errorCode, data } = response.data;
           if(errorCode == 0) {

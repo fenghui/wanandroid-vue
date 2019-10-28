@@ -1,19 +1,27 @@
 <template>
-  <div class="container">
+  <div class="custom-list">
+    <div class="header">
+      <div 
+        class="icon left"
+        @click="pageBack()"></div>
+      <div class="center">我的收藏</div>
+      <div class="right"></div>
+    </div>
     <ArticleList 
-      :articleLists="articleDatas" />
+      class="list" 
+      :articleLists="articleDatas"/>
   </div>
 </template>
 
 <script>
-  import { ArticleListItem, ArticleList } from '../../../../components/Article'
-  import Api from '../../../../assets/js/api'
-
+  import ArticleList from '../../components/Article/ArticleList';
+  import Api from '../../assets/js/api';
   export default {
     components:{
       ArticleList
     },
-    props:{},
+    props:{
+    },
     data(){
       return {
         currPage: 0,
@@ -25,7 +33,7 @@
     computed:{},
     methods:{
       getArticleList() {
-        this.$axios.get(`${Api.indexUrlPrefix}/${this.currPage}/json`)
+        this.$axios.get(`${Api.collectUrl}/${this.currPage}/json`)
         .then( (response) => {
           const { errorCode, data } = response.data;
           if(errorCode == 0) {
@@ -43,7 +51,7 @@
         })
       },
       setScrollListener() {
-        const el = document.querySelector('.container');
+        const el = document.querySelector('.list');
         const offsetHeight = el.offsetHeight;
         el.onscroll = () => {
           const scrollTop = el.scrollTop;
@@ -55,20 +63,50 @@
             }
           }
         }
+      },
+      pageBack() {
+        this.$router.back();
       }
     },
-    created(){
-      
-    },
+    created(){},
     mounted(){
-      this.getArticleList();
       this.setScrollListener();
+      this.getArticleList();
     }
   }
 </script>
 
 <style lang="less" scoped>
-  .container {
+  .custom-list {
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-direction: column;
 
+    .header {
+      width: 100%;
+      display: flex;
+      height: 40px;
+      line-height: 40px;
+      .left {
+        background-image: url('back.png');
+        margin-left: 20px;
+        margin-top: 5px;
+      }
+      .center {
+        flex: 1;
+        text-align: center;
+      }
+      .right {
+        width: 50px;
+      }
+    }
+
+    .list {
+      flex: 1;
+      background-color: #eeecec;
+      overflow-y: scroll;
+      padding: 10px;
+    }
   }
 </style>

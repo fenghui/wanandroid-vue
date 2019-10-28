@@ -6,7 +6,6 @@
 
 <script>
   import { ArticleListItem, ArticleList } from '../../../components/Article'
-  import Axios from 'axios';
   import Api from '../../../assets/js/api'
 
   export default {
@@ -28,7 +27,7 @@
     methods:{
       getArticleList() {
         if(this.cid > 0) {
-          Axios.get(`${Api.wxArticleListUrl}/${this.cid}/${this.currPage}/json`)
+          this.$axios.get(`${Api.wxArticleListUrl}/${this.cid}/${this.currPage}/json`)
           .then( (response) => {
             const { errorCode, data } = response.data;
             if(errorCode == 0) {

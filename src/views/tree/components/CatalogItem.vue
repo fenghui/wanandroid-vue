@@ -1,6 +1,6 @@
 <template>
   <li class="catalog-item">
-    <h3>{{ catalogData.name }}</h3>
+    <h4>{{ catalogData.name }}</h4>
     <div>
       <span 
         v-for="(item, index) in catalogData.children" 
@@ -48,7 +48,7 @@
     margin-top: 10px;
     background-color: #ffffff;
     border-radius: 20px;
-    h3 {
+    h4 {
       height: 40px;
       line-height: 40px;
     }

@@ -11,7 +11,6 @@
 </template>
 
 <script>
-  import Axios from 'axios';
   import Api from '../../../../assets/js/api'
   export default {
     components:{},
@@ -39,7 +38,7 @@
       }
     },
     created(){
-      Axios.get(Api.bannerUrl)
+      this.$axios.get(Api.bannerUrl)
         .then( (response) => {
           this.banners = response.data;
           this.bannerBackgroundImg = this.banners.data[this.bannerIndex].imagePath;

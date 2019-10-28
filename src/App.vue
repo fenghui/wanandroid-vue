@@ -1,6 +1,9 @@
 <template>
   <div id="app">
-    <IndexPage />
+    <!-- <IndexPage /> -->
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 

@@ -9,7 +9,6 @@
 
 <script>
   import { ArticleListItem, ArticleList } from '../../../components/Article'
-  import Axios from 'axios';
   import Api from '../../../assets/js/api'
 
   export default {
@@ -39,7 +38,7 @@
     computed:{},
     methods:{
       getArticleList() {
-        Axios.get(`${Api.articleListUrl}/${this.currPage}/json?cid=${this.cid}`)
+        this.$axios.get(`${Api.articleListUrl}/${this.currPage}/json?cid=${this.cid}`)
         .then( (response) => {
           const { errorCode, data } = response.data;
           if(errorCode == 0) {

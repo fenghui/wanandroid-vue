@@ -9,7 +9,6 @@
 
 <script>
   import CatalogItem from './CatalogItem'
-  import Axios from 'axios';
   import Api from '../../../assets/js/api'
   export default {
     components:{
@@ -25,7 +24,7 @@
     computed:{},
     methods:{
       getCatalogs() {
-        Axios.get(`${Api.treeUrl}`)
+        this.$axios.get(`${Api.treeUrl}`)
         .then( (response) => {
           const { errorCode, data } = response.data;
           if(errorCode == 0) {

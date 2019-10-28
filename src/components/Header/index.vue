@@ -1,15 +1,17 @@
 <template>
   <div class="header">
-    <div>
+    <div
+      @click="switchLeftMenu">
       <i class="icon" 
         v-bind:class="[ isLogined === 'true' ? 'icon-face' : 'icon-back' ]" />
     </div>
     <div class="title">{{ title }}</div>
-    <div><i class="icon icon-search" /></div>
+    <div @click="search"><i class="icon icon-search" /></div>
   </div>
 </template>
 
 <script>
+  import { mapActions, mapState } from 'vuex';
   export default {
     components:{},
     props:{
@@ -21,8 +23,19 @@
       }
     },
     watch:{},
-    computed:{},
-    methods:{},
+    computed:{
+      ...mapState('global', ['leftMenuShow', 'tabIndex'])
+    },
+    methods:{
+      // userInfo() {
+
+      // },
+      search() {
+        alert(this.leftMenuShow + "," + this.tabIndex);
+        //alert('开发中...');
+      },
+      ...mapActions('global', ['switchLeftMenu'])
+    },
     created(){},
     mounted(){}
   }

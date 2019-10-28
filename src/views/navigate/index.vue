@@ -10,7 +10,6 @@
 </template>
 
 <script>
-  import Axios from 'axios';
   import Api from '../../assets/js/api'
   import Menu from './Menu';
   import List from './List';
@@ -30,7 +29,7 @@
     computed:{},
     methods:{
       getNavList() {
-        Axios.get(Api.navUrl)
+        this.$axios.get(Api.navUrl)
         .then( (response) => {
           const { errorCode, data } = response.data;
           if(errorCode == 0) {
