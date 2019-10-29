@@ -46,11 +46,13 @@
       onSubmit() {
         this.$axios.post(Api.loginUrl, qs.stringify(this.formData))
         .then( (response) => {
+          console.log(response);
           const { errorCode, data, errorMsg } = response.data;
           if(errorCode == 0) {
             this.login(data);
             this.errorMsg = '';
-            this.$router.push('/');
+            let targetUrl = this.$route.query.from || '/';
+            this.$router.push(targetUrl);
           } else {
             this.errorMsg = errorMsg;
             console.error('errorCode', errorCode);
@@ -65,7 +67,8 @@
       ...mapActions( 'user', [ 'login' ] )
     },
     created(){},
-    mounted(){}
+    mounted(){
+    }
   }
 </script>
 

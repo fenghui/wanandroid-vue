@@ -3,6 +3,7 @@ html, body {
   word-wrap: break-word; 
   white-space: normal; 
   word-break:break-all; 
+  height: 100%;
 }
 
 h1 {
@@ -50,4 +51,9 @@ a {
 .txt-error {
   color: red;
   margin: 10px 0;
+}
+
+.wapper {
+  height: 100%;
+  overflow-y: scroll;
 }

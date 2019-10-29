@@ -1,10 +1,12 @@
 <template>
-  <ul class="catalog-list">
-    <CatalogItem 
-      v-for="item in catalogDatas"
-      :key="item.id"
-      :catalogData="item"/>
-  </ul>
+  <div class="wapper">
+    <ul class="catalog-list">
+      <CatalogItem 
+        v-for="item in catalogDatas"
+        :key="item.id"
+        :catalogData="item"/>
+    </ul>
+  </div>
 </template>
 
 <script>

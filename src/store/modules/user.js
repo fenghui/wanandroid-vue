@@ -19,10 +19,12 @@ const mutations = {
   login(state, userInfo) {
     state.isLogined = true;
     state.userInfo = userInfo;
+    localStorage.setItem('userInfo', JSON.stringify(userInfo));
   },
   logout(state) {
     state.isLogined = false;
     state.userInfo = {};
+    localStorage.removeItem('userInfo');
   }
 };
 

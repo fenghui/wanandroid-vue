@@ -1,5 +1,5 @@
 <template>
-  <div class="wx-chapter">
+  <div class="proj-chapter">
     <ul class="tabbar">
       <li 
         v-for="(item, index) in projectTree"
@@ -9,7 +9,9 @@
         {{item.name}}
       </li>
     </ul>
-    <ArticleList ref="list"/>
+    <div class="list">
+      <ArticleList ref="list"/>
+    </div>
   </div>
 </template>
 
@@ -69,8 +71,12 @@
 </script>
 
 <style lang="less" scoped>
-  .wx-chapter {
+  .proj-chapter {
     width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+
     .tabbar {
       display: inline-flex;
       display: -webkit-inline-box;
@@ -90,6 +96,10 @@
           border-bottom: 5px solid #ffffff;
         }
       }
+    }
+    .list {
+      flex: 1;
+      overflow-y: hidden;
     }
   }
 </style>

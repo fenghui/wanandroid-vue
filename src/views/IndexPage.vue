@@ -60,11 +60,10 @@
     display: flex;
     flex-direction: column;
     height: 100%;
-  }
-
-  .container {
-    flex: 1;
-    overflow-y: scroll;
-    background-color: #eeecec;
+    .container {
+      flex: 1;
+      overflow-y: hidden;
+      background-color: #eeecec;
+    }
   }
 </style>

@@ -86,4 +86,10 @@ router.beforeEach((to, from, next) => {
   next()
 })
 
+//用户登录信息
+const userInfo = localStorage.getItem('userInfo');
+if(userInfo) {
+  store.dispatch('user/login', JSON.parse(userInfo));
+}
+
 export { router, store};

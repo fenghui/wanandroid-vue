@@ -1,6 +1,6 @@
 <template>
-  <div class="container">
-    <Banner />
+  <div class="main-container">
+    <Banner class="banner" />
     <Container class="list" />
   </div>
 </template>
@@ -31,9 +31,10 @@
 </script>
 
 <style lang="less" scoped>
-
-  .container {
+  .main-container {
+    height: 100%;
     background-color: #eeecec;
+    overflow-y: scroll;
     .list {
       padding: 0 10px;
     }

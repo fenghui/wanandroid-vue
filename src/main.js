@@ -10,7 +10,7 @@ Vue.config.productionTip = false
 
 
 //设置请求携带cookie
-axios.defaults.withCredentials = true;
+//axios.defaults.withCredentials = true;
 Vue.prototype.$axios = axios;
 
 // new Vue({

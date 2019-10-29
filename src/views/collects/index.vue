@@ -40,6 +40,8 @@
             const { pageCount, datas } = data;
             this.totalPage = pageCount;
             this.articleDatas = this.articleDatas.concat(datas);
+          } else if(errorCode == -1001) {
+            this.$router.push('/login');
           } else {
             console.error('errorCode', errorCode);
           }
@@ -51,7 +53,7 @@
         })
       },
       setScrollListener() {
-        const el = document.querySelector('.list');
+        const el = document.querySelector('.container');
         const offsetHeight = el.offsetHeight;
         el.onscroll = () => {
           const scrollTop = el.scrollTop;
@@ -65,12 +67,12 @@
         }
       },
       pageBack() {
-        this.$router.back();
+        this.$router.push('/');
       }
     },
     created(){},
     mounted(){
-      this.setScrollListener();
+      //this.setScrollListener();
       this.getArticleList();
     }
   }

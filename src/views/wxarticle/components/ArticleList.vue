@@ -1,7 +1,9 @@
 <template>
-    <ArticleList 
-      class="article-list"
-      :articleLists="articleDatas" />
+    <div class="wapper wxarticle-coontainer">
+      <ArticleList 
+        class="wx-article-list"
+        :articleLists="articleDatas" />
+    </div>
 </template>
 
 <script>
@@ -19,7 +21,8 @@
         cid: -1,
         currPage: 0,
         totalPage: 1, 
-        articleDatas: []
+        articleDatas: [],
+        isLoading: false
       }
     },
     watch:{},
@@ -27,6 +30,10 @@
     methods:{
       getArticleList() {
         if(this.cid > 0) {
+          if(this.isLoading) {
+            return;
+          }
+          this.isLoading = true;
           this.$axios.get(`${Api.wxArticleListUrl}/${this.cid}/${this.currPage}/json`)
           .then( (response) => {
             const { errorCode, data } = response.data;
@@ -37,22 +44,27 @@
             } else {
               console.error('errorCode', errorCode);
             }
+            this.isLoading = false;
           })
           .catch( (error) => {
             console.error(error);
+            this.isLoading = false;
           })
           .then( function() {
           })
         }
       },
       setScrollListener() {
-        const el = document.querySelector('.container');
+        const el = document.querySelector('.wxarticle-coontainer');
         const offsetHeight = el.offsetHeight;
         el.onscroll = () => {
           const scrollTop = el.scrollTop;
           const scrollHeight = el.scrollHeight;
           if(offsetHeight + scrollTop - scrollHeight >= -20) {
             if(this.currPage < this.totalPage) {
+              if(this.isLoading) {
+                return;
+              }
               this.currPage++;
               this.getArticleList();
             }
@@ -78,7 +90,7 @@
 </script>
 
 <style lang="less" scoped>
-  .article-list {
+  .wx-article-list {
     margin: 10px 15px;
   }
 </style>

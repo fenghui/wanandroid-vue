@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="wapper articles-container">
       <!-- <span @click="pageBack()">Back</span> -->
       <ArticleList 
         class="article-list"
@@ -22,7 +22,8 @@
         currPage: 0,
         totalPage: 1,
         articleDatas: [],
-        cid: 0
+        cid: 0,
+        isLoading: false
       }
     },
     watch:{
@@ -38,6 +39,10 @@
     computed:{},
     methods:{
       getArticleList() {
+        if(this.isLoading) {
+          return;
+        }
+        this.isLoading = true;
         this.$axios.get(`${Api.articleListUrl}/${this.currPage}/json?cid=${this.cid}`)
         .then( (response) => {
           const { errorCode, data } = response.data;
@@ -48,21 +53,26 @@
           } else {
             console.error('errorCode', errorCode);
           }
+          this.isLoading = false;
         })
         .catch( (error) => {
           console.error(error);
+          this.isLoading = false;
         })
         .then( function() {
         })
       },
       setScrollListener() {
-        const el = document.querySelector('.container');
+        const el = document.querySelector('.articles-container');
         const offsetHeight = el.offsetHeight;
         el.onscroll = () => {
           const scrollTop = el.scrollTop;
           const scrollHeight = el.scrollHeight;
           if(offsetHeight + scrollTop - scrollHeight >= -20) {
             if(this.currPage + 1 < this.totalPage) {
+              if(this.isLoading) {
+                return;
+              }
               this.currPage++;
               this.getArticleList();
             }
